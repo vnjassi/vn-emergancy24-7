@@ -3,78 +3,111 @@
 <head>
     <title>VN Emergency Medical Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f4f8fb;
+            background: #f4f8fb;
+        }
+
+        header {
+            background: #c1121f;
+            color: white;
+            padding: 20px;
             text-align: center;
         }
-        header {
-            background-color: #c1121f;
-            color: white;
-            padding: 25px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+
         section {
-            padding: 30px 20px;
-        }
-        .services {
-            background: white;
-            margin: 20px auto;
             padding: 20px;
-            max-width: 500px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
-        .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #25D366;
-            color: white;
-            text-decoration: none;
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
             border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
+            border: 1px solid #ccc;
         }
-        footer {
-            background-color: #003049;
-            color: white;
+
+        button {
+            margin-top: 15px;
             padding: 12px;
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #003049;
+            color: white;
+            text-align: center;
+            padding: 10px;
             margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
 
 <header>
     <h1>VN Emergency Medical Store</h1>
-    <p>24/7 Emergency Medicines Available</p>
+    <p>24/7 Emergency Medicines | Fast Home Delivery</p>
 </header>
 
 <section>
-    <div class="services">
-        <h2>Our Services</h2>
-        <p>✔ All Emergency Medicines Available</p>
-        <p>✔ 24/7 Open</p>
-        <p>✔ Fast Home Delivery</p>
-        <p>✔ Trusted & Genuine Medicines</p>
 
-        <h3>Contact Us</h3>
-        <p>📞 Phone: +91 YOURNUMBER</p>
+    <div class="card">
+        <h2>Order Medicine</h2>
 
-        <a class="btn" href="https://wa.me/91YOURNUMBER" target="_blank">
-            Order on WhatsApp
-        </a>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="tel" id="phone" placeholder="Your Phone Number" required>
+        <textarea id="medicine" placeholder="Medicine Name & Quantity" required></textarea>
+        <textarea id="address" placeholder="Delivery Address" required></textarea>
+
+        <button onclick="sendToWhatsApp()">Place Order on WhatsApp</button>
     </div>
+
 </section>
 
 <footer>
-    <p>© 2026 VN Emergency Medical Store | All Rights Reserved</p>
+    © 2026 VN Emergency Medical Store | All Rights Reserved
 </footer>
+
+<script>
+function sendToWhatsApp() {
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var medicine = document.getElementById("medicine").value;
+    var address = document.getElementById("address").value;
+
+    var message = "New Order:%0A"
+        + "Name: " + name + "%0A"
+        + "Phone: " + phone + "%0A"
+        + "Medicine: " + medicine + "%0A"
+        + "Address: " + address;
+
+    var whatsappNumber = "91YOURNUMBER"; 
+
+    var url = "https://wa.me/" + whatsappNumber + "?text=" + message;
+
+    window.open(url, "_blank");
+}
+</script>
 
 </body>
 </html>
