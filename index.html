@@ -3,7 +3,7 @@
 <head>
     <title>VN Emergency Medical Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,12 +44,20 @@
             margin-top: 15px;
             padding: 12px;
             width: 100%;
-            background: #25D366;
-            color: white;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .call-btn {
+            background: #003049;
+            color: white;
         }
 
         footer {
@@ -58,6 +66,12 @@
             text-align: center;
             padding: 10px;
             margin-top: 20px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
@@ -74,12 +88,26 @@
     <div class="card">
         <h2>Order Medicine</h2>
 
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="tel" id="phone" placeholder="Your Phone Number" required>
-        <textarea id="medicine" placeholder="Medicine Name & Quantity" required></textarea>
-        <textarea id="address" placeholder="Delivery Address" required></textarea>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="tel" id="phone" placeholder="Your Phone Number">
+        <textarea id="medicine" placeholder="Medicine Name & Quantity"></textarea>
+        <textarea id="address" placeholder="Delivery Address"></textarea>
 
-        <button onclick="sendToWhatsApp()">Place Order on WhatsApp</button>
+        <button class="whatsapp-btn" onclick="sendToWhatsApp()">Place Order on WhatsApp</button>
+        <button class="call-btn" onclick="callNow()">Call Emergency</button>
+
+        <p class="success" id="successMsg">Order page opened in WhatsApp ✅</p>
+    </div>
+
+    <div class="card">
+        <h2>Our Location</h2>
+        <p>Available 24/7 for Emergency Medicines</p>
+        <iframe 
+            src="https://maps.google.com/maps?q=Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" 
+            height="250" 
+            style="border:0;">
+        </iframe>
     </div>
 
 </section>
@@ -90,22 +118,34 @@
 
 <script>
 function sendToWhatsApp() {
+
     var name = document.getElementById("name").value;
     var phone = document.getElementById("phone").value;
     var medicine = document.getElementById("medicine").value;
     var address = document.getElementById("address").value;
 
-    var message = "New Order:%0A"
+    if(name === "" || phone === "" || medicine === "" || address === ""){
+        alert("Please fill all details!");
+        return;
+    }
+
+    var message = "New Emergency Order:%0A"
         + "Name: " + name + "%0A"
         + "Phone: " + phone + "%0A"
         + "Medicine: " + medicine + "%0A"
         + "Address: " + address;
 
-    var whatsappNumber = "919560980802"; 
+    var whatsappNumber = "91YOURNUMBER"; 
 
     var url = "https://wa.me/" + whatsappNumber + "?text=" + message;
 
     window.open(url, "_blank");
+
+    document.getElementById("successMsg").style.display = "block";
+}
+
+function callNow(){
+    window.location.href = "tel:+919560980802";
 }
 </script>
 
